@@ -1,14 +1,9 @@
-import React,{useState} from 'react';
-import PropTypes from 'prop-types'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function Navbar(props) {
-    const [mode, setMode] = useState('light');
-    const toggleMode=()=>{
-        if(mode==='light')setMode("dark");
-        else setMode("light");
-    }
     return (
-        <nav className={`navbar navbar-expand-lg bg-${mode} navbar-${mode}`}>
+        <nav className={`navbar navbar-expand-lg bg-${props.mode} navbar-${props.mode}`}>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">{props.title}</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,9 +19,9 @@ export default function Navbar(props) {
                         </li>
                     </ul>
                     <form className="d-flex" role="search">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" onClick={toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class={`form-check-label text-${mode==='light'?'dark':'light'}`} htmlFor="flexSwitchCheckDefault"> {`${mode === 'dark' ? "Disable" : "Enable"} Dark Mode`}</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className={`form-check-label text-${props.mode === 'light' ? 'dark' : 'light'}`} htmlFor="flexSwitchCheckDefault"> {`${props.mode === 'dark' ? "Disable" : "Enable"} Dark Mode`}</label>
                         </div>
                     </form>
                 </div>
@@ -39,9 +34,9 @@ export default function Navbar(props) {
 Navbar.prototype = {
     title: PropTypes.string.isRequired,
     aboutText: PropTypes.string
-}
+};
 
 Navbar.defaultProps = {
     title: "Title is here",
     aboutText: "About"
-}
+};

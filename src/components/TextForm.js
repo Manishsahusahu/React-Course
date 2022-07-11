@@ -1,14 +1,27 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 
 export default function TextForm(props) {
-    const handleOnClick=()=>{
+    let body = document.querySelector('body');
+    // let textarea = document.querySelector('textarea');
+    if (props.mode === 'dark') { 
+        body.style.backgroundColor = '#564141'; 
+        body.style.color='#d8b2b2';
+    }
+    else {
+        body.style.backgroundColor = '#ffffff'; 
+        body.style.color='black';
+    }
+    const handleOnClick = () => {
         setText(text.toUpperCase());
     }
-    const handleLoClick=()=>{
+    const handleLoClick = () => {
         setText(text.toLowerCase());
     }
-    const handleOnChange=(event)=>{
+    const handleOnChange = (event) => {
         setText(event.target.value);
+    }
+    const handleClear=()=>{
+        setText("");
     }
     const [text, setText] = useState('Enter text here');
     return (
@@ -17,10 +30,11 @@ export default function TextForm(props) {
                 <h2>{props.heading}</h2>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" value={text} onChange={handleOnChange} rows="12"></textarea>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" style={{backgroundColor:`${props.mode==='dark'?'#564141':'white'}`, color:`${props.mode==='light'?'#564141':'white'}`}} value={text} onChange={handleOnChange} rows="12"></textarea>
                 </div>
-                    <button className='btn btn-primary mx-1' onClick={handleOnClick}>Convert to Upper-Case</button>
-                    <button className='btn btn-primary mx-1' onClick={handleLoClick}>Convert to Lower-Case</button>
+                <button className='btn btn-primary mx-1' onClick={handleOnClick}>Convert to Upper-Case</button>
+                <button className='btn btn-primary mx-1' onClick={handleLoClick}>Convert to Lower-Case</button>
+                <button className='btn btn-primary mx-1' onClick={handleClear}>Clear Text</button>
             </div>
             <div className="container my-3">
                 <h3>Your text summary</h3>
