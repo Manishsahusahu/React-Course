@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export default function TextForm(props) {
     let body = document.querySelector('body');
-    // let textarea = document.querySelector('textarea');
     if (props.mode === 'dark') { 
         body.style.backgroundColor = '#564141'; 
         body.style.color='#d8b2b2';
@@ -13,15 +12,18 @@ export default function TextForm(props) {
     }
     const handleOnClick = () => {
         setText(text.toUpperCase());
+        props.showAlert('Text is converted to Upper-case!','success');
     }
     const handleLoClick = () => {
         setText(text.toLowerCase());
+        props.showAlert('Text is converted to Lower-case!','success');
     }
     const handleOnChange = (event) => {
         setText(event.target.value);
     }
     const handleClear=()=>{
         setText("");
+        props.showAlert('Text is Cleared!','warning');
     }
     const [text, setText] = useState('Enter text here');
     return (
