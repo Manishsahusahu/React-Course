@@ -11,17 +11,23 @@ import {
 } from "react-router-dom";
 
 function App() {
+	// const removeTheme=()=>{
+	// 	document.body.classList.remove('bg-danger');
+	// 	document.body.classList.remove('bg-primary');
+	// 	document.body.classList.remove('bg-warning');
+	// 	document.body.classList.remove('bg-success');
+	// 	document.body.classList.remove('bg-light');
+	// }
 	const [mode, setMode] = useState('light');
-	const toggleMode = () => {
+	const toggleMode = (colorClass) => {
+		// removeTheme();
+		// document.body.classList.add('bg-'+colorClass);
 		if (mode === 'light') {
 			setMode("dark");
 			showAlert('Dark Mode has turned on', 'success');
-			document.title = 'TextUtils - Dark Mode';
 		}
 		else {
 			setMode("light");
-
-			document.title = 'TextUtils';
 		}
 	}
 	const [alert, setAlert] = useState(null);
@@ -38,14 +44,17 @@ function App() {
 		<>
 			<Router>
 				<Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
-				<Alert alert={alert} />
+				<div style={{height:'50px'}}>
+					<Alert alert={alert} />
+				</div>
 				<div className="container my-3">
 					<Routes>
-						<Route exact path="/about" element={<About/>}>
+						<Route exact path="/about" element={<About mode={mode} />}>
 						</Route>
 						<Route exact path="/users" element={<TextForm mode={mode} toggleMode={toggleMode} alert={alert} showAlert={showAlert} />}>
 						</Route>
 					</Routes>
+					{/* <TextForm mode={mode} toggleMode={toggleMode} alert={alert} showAlert={showAlert} /> */}
 				</div>
 			</Router>
 		</>

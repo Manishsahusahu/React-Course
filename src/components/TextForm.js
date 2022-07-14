@@ -31,16 +31,15 @@ export default function TextForm(props) {
             <div className="container">
                 <h2>{props.heading}</h2>
                 <div className="mb-3">
-                    <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
                     <textarea className="form-control" id="exampleFormControlTextarea1" style={{backgroundColor:`${props.mode==='dark'?'#564141':'white'}`, color:`${props.mode==='light'?'#564141':'white'}`}} value={text} onChange={handleOnChange} rows="12"></textarea>
                 </div>
-                <button className='btn btn-primary mx-1' onClick={handleOnClick}>Convert to Upper-Case</button>
-                <button className='btn btn-primary mx-1' onClick={handleLoClick}>Convert to Lower-Case</button>
-                <button className='btn btn-primary mx-1' onClick={handleClear}>Clear Text</button>
+                <button className='btn btn-primary mx-1 my-2' onClick={handleOnClick}>Convert to Upper-Case</button>
+                <button className='btn btn-primary mx-1 my-2' onClick={handleLoClick}>Convert to Lower-Case</button>
+                <button className='btn btn-primary mx-1 my-2' onClick={handleClear}>Clear Text</button>
             </div>
             <div className="container my-3">
                 <h3>Your text summary</h3>
-                <p>You've entered {text.split(" ").length} words and {text.length} letters.</p>
+                <p>You've entered {text.split(" ").filter((word)=>{return word.length!==0;}).length} words and {text.length} letters.</p>
             </div>
             <div className="container">
                 <h3>Preview of text</h3>
@@ -48,4 +47,8 @@ export default function TextForm(props) {
             </div>
         </>
     )
+}
+
+TextForm.defaultProps={
+    heading: "TextUtils - Convert to UpperCase / LowerCase, Clear Text"
 }
